@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import ebay.qa.testautomation.pages.WebAppHomePage;
 import junit.framework.Assert;
 
 public class SearchTest extends SystemTest {
@@ -23,9 +24,10 @@ public class SearchTest extends SystemTest {
 		
 		getTestDriver().get(getUrlUnderTest());
 
-		getTestDriver().findElement(By.id("gh-ac")).sendKeys(searchText);
-
-		getTestDriver().findElement(By.id("gh-btn")).click();
+		WebAppHomePage wbp = new WebAppHomePage(getTestDriver());
+		wbp.doSearch(searchText);
+		
+		//TODO handle stuff inside the SearchResults page
 		
 		//verify No of Results for item
 		String resultsNo = getTestDriver().findElement(By.className("rsHdr")).findElement(By.className("rcnt")).getText();
