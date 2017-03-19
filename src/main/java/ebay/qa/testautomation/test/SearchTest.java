@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import ebay.qa.testautomation.pages.WebAppHomePage;
 import ebay.qa.testautomation.pages.WebAppSearchResultsPage;
+import ebay.qa.testautomation.reps.TestSearchResultItemCard;
 import junit.framework.Assert;
 
 public class SearchTest extends SystemTest {
@@ -22,53 +23,18 @@ public class SearchTest extends SystemTest {
 	public void testSearchAllCategories() {
 
 		String searchText = "xbox";
-		
+
 		getTestDriver().get(getUrlUnderTest());
 
 		WebAppHomePage wbp = new WebAppHomePage(getTestDriver());
 		WebAppSearchResultsPage searchrp = wbp.doSearch(searchText);
+
+		Assert.assertTrue(searchrp.getNoOfResults() > 0);
+		Assert.assertTrue(searchrp.getNoOfResultsText().contains("results for " + searchText));
 		
-		//TODO handle stuff inside the SearchResults page
+		//get all the cards
 		
-		//verify No of Results for item
-		String resultsNo = getTestDriver().findElement(By.className("rsHdr")).findElement(By.className("rcnt")).getText();
-		
-		
-		Assert.assertTrue(!resultsNo.isEmpty());
-		Assert.assertTrue(resultsText.contains("results for " + searchText));
-		
-		//verify searchResultsCards presented have the searchItem in the titl
-		List<WebElement> resultsList = getTestDriver().findElements(By.className("sresult"));
-		System.out.println("Found " + resultsList.size() + " results Items in the first page");
-		
-		for(WebElement resultItemRow: resultsList){
-			Assert.assertTrue(resultItemRow.findElement(By.className("lvtitle")).getText().toLowerCase().contains(searchText.toLowerCase()));
-			System.out.println("Result item " + resultItemRow.getAttribute("id") + "has expected search term");
-			
-			//shows price
-			Assert.assertTrue(resultItemRow.findElement(By.className("lvprice")).isDisplayed());
-			
-			//shows type of offering
-			Assert.assertTrue(resultItemRow.findElement(By.className("lvformat")).isDisplayed());
-			
-			//shows postage price
-			Assert.assertTrue(resultItemRow.findElement(By.className("lvshipping")).isDisplayed());
-			
-			//Shows Buy it Now tag if the type is not bid
-			WebElement e = resultItemRow.findElement(By.className("lvformat"));
-			String lvformatText = e.getText();
-			if(lvformatText.length() == 0){
-				Assert.assertTrue(resultItemRow.findElement(By.className("logoBin")).isDisplayed());
-			}
-			
-			
-			
-			
-			
-		}
-		
-		//And the resulting items cards have: postage price, No of bids, price or show BuyItNow tag
-		
+		//verify the card elements shown for each card
 
 	}
 
