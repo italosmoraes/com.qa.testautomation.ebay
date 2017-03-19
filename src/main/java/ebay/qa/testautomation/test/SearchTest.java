@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import ebay.qa.testautomation.pages.WebAppHomePage;
+import ebay.qa.testautomation.pages.WebAppSearchResultsPage;
 import junit.framework.Assert;
 
 public class SearchTest extends SystemTest {
@@ -25,13 +26,13 @@ public class SearchTest extends SystemTest {
 		getTestDriver().get(getUrlUnderTest());
 
 		WebAppHomePage wbp = new WebAppHomePage(getTestDriver());
-		wbp.doSearch(searchText);
+		WebAppSearchResultsPage searchrp = wbp.doSearch(searchText);
 		
 		//TODO handle stuff inside the SearchResults page
 		
 		//verify No of Results for item
 		String resultsNo = getTestDriver().findElement(By.className("rsHdr")).findElement(By.className("rcnt")).getText();
-		String resultsText = getTestDriver().findElement(By.className("rsHdr")).findElement(By.className("kwcat")).getText();
+		
 		
 		Assert.assertTrue(!resultsNo.isEmpty());
 		Assert.assertTrue(resultsText.contains("results for " + searchText));
@@ -44,10 +45,16 @@ public class SearchTest extends SystemTest {
 			Assert.assertTrue(resultItemRow.findElement(By.className("lvtitle")).getText().toLowerCase().contains(searchText.toLowerCase()));
 			System.out.println("Result item " + resultItemRow.getAttribute("id") + "has expected search term");
 			
+			//shows price
 			Assert.assertTrue(resultItemRow.findElement(By.className("lvprice")).isDisplayed());
+			
+			//shows type of offering
 			Assert.assertTrue(resultItemRow.findElement(By.className("lvformat")).isDisplayed());
+			
+			//shows postage price
 			Assert.assertTrue(resultItemRow.findElement(By.className("lvshipping")).isDisplayed());
 			
+			//Shows Buy it Now tag if the type is not bid
 			WebElement e = resultItemRow.findElement(By.className("lvformat"));
 			String lvformatText = e.getText();
 			if(lvformatText.length() == 0){
