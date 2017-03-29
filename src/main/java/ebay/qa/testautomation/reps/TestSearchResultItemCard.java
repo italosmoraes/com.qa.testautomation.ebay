@@ -10,7 +10,7 @@ public class TestSearchResultItemCard {
 	private String titleText;
 	private String shipPriceText;
 	private String offerPriceText;
-	private String noOfBidsText;
+	private String noOfBidsText; //only if type is "auction"
 	private String offerType;
 	private boolean buyItNowTagShown;
 

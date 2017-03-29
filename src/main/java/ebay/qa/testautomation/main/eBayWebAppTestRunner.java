@@ -25,13 +25,13 @@ public class eBayWebAppTestRunner {
 		SystemTest testC = new SystemTest("Full Regression Test", "http://www.ebay.co.uk", "chrome");
 		SystemTest testF = new SystemTest("Full Regression Test", "http://www.ebay.co.uk", "firefox");
 		
-		TestResult resultsC = junit.textui.TestRunner.run(testC.suite());
-		//TestResult resultsF = junit.textui.TestRunner.run(testF.suite());
+		//TestResult resultsC = junit.textui.TestRunner.run(testC.suite());
+		TestResult resultsF = junit.textui.TestRunner.run(testF.suite());
 		
 		
 
-		getResults(resultsC, testC.getName());
-		//getResults(resultsF, testF.getName());
+		//getResults(resultsC, testC.getName());
+		getResults(resultsF, testF.getName());
 
 
 	}
