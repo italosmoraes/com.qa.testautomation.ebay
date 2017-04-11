@@ -26,14 +26,14 @@ public class SystemTest extends TestCase {
 
 	public SystemTest(String testName) {
 		super(testName);
-		browser = "chrome";
-		urlUnderTest = "http://www.ebay.co.uk";
+		this.browser = "chrome";
+		this.urlUnderTest = "http://www.ebay.co.uk";
 	}
-	
-	public SystemTest(String testName, String url, String b){
+
+	public SystemTest(String testName, String url, String b) {
 		super(testName);
-		urlUnderTest = url;
-		browser = b;
+		this.urlUnderTest = url;
+		this.browser = b;
 	}
 
 	// rump up
@@ -41,34 +41,31 @@ public class SystemTest extends TestCase {
 
 		System.out.println("Initiating test: " + this.getName());
 
-		//get data
+		// get data
 		activeData = new ActiveData();
-		
+
 		// get parameters
 		setTestDriver(browser);
 
-		getTestDriver().navigate().to(urlUnderTest); 
-		
-		
+		getTestDriver().navigate().to(urlUnderTest);
 
 	}
 
 	public void tearDown() {
 
-		//getTestDriver().quit();
+		// getTestDriver().quit();
 
-		System.out.println("Tests ran: " + suite.countTestCases());
+		// System.out.println("Tests ran: " + this.suite.countTestCases());
 
 		System.out.println("Finalizing tests.");
 
 	}
 
 	public Test suite() {
-		suite = new TestSuite();
-		suite.addTest(new SearchTest("testSearchAllCategories", urlUnderTest, browser));
-		//suite.addTest(new SearchTest("testSearchSpecificCategory"));
-		
-		
+		this.suite = new TestSuite();
+		//this.suite.addTest(new SearchTest("testSearchAllCategories", urlUnderTest, browser));
+		this.suite.addTest(new SearchTest("testSearchSpecificCategory", urlUnderTest, browser));
+
 		return suite;
 	}
 
@@ -111,6 +108,5 @@ public class SystemTest extends TestCase {
 	public void setSuite(TestSuite s) {
 		suite = s;
 	}
-	
-	
+
 }
