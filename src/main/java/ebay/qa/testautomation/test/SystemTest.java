@@ -2,7 +2,8 @@ package ebay.qa.testautomation.test;
 
 import org.openqa.selenium.WebDriver;
 
-import ebay.qa.testautomation.util.ActiveData;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import ebay.qa.testautomation.util.TestDriver;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -18,55 +19,35 @@ import junit.framework.TestSuite;
 
 public class SystemTest extends TestCase {
 
-	private TestDriver testDriver;
-	private String browser;
-	private ActiveData activeData;
-	private String urlUnderTest;
-	private TestSuite suite;
-
-	public SystemTest(String testName) {
-		super(testName);
-		this.browser = "chrome";
-		this.urlUnderTest = "http://www.ebay.co.uk";
-	}
-
-	public SystemTest(String testName, String url, String b) {
-		super(testName);
-		this.urlUnderTest = url;
-		this.browser = b;
+	public static TestDriver testDriver;
+	public static String browser;
+	public static String urlUnderTest;
+	public static TestSuite suite;
+	
+	public SystemTest(){
+		
 	}
 
 	// rump up
+	@Before
 	public void setUp() {
 
-		System.out.println("Initiating test: " + this.getName());
+		System.out.println("Initiating test" );
 
-		// get data
-		activeData = new ActiveData();
-
+		//default browser
+		browser = "chrome";
+		
 		// get parameters
 		setTestDriver(browser);
 
-		getTestDriver().navigate().to(urlUnderTest);
-
 	}
 
+	@After
 	public void tearDown() {
 
-		// getTestDriver().quit();
-
-		// System.out.println("Tests ran: " + this.suite.countTestCases());
 
 		System.out.println("Finalizing tests.");
 
-	}
-
-	public Test suite() {
-		this.suite = new TestSuite();
-		//this.suite.addTest(new SearchTest("testSearchAllCategories", urlUnderTest, browser));
-		this.suite.addTest(new SearchTest("testSearchSpecificCategory", urlUnderTest, browser));
-
-		return suite;
 	}
 
 	public WebDriver getTestDriver() {
@@ -77,36 +58,5 @@ public class SystemTest extends TestCase {
 		testDriver = new TestDriver(d);
 	}
 
-	public String getBrowser() {
-		return browser;
-	}
-
-	public void setBrowser(String b) {
-		browser = b;
-	}
-
-	public ActiveData getActiveData() {
-		return activeData;
-	}
-
-	public void setActiveData(ActiveData a) {
-		activeData = a;
-	}
-
-	public String getUrlUnderTest() {
-		return urlUnderTest;
-	}
-
-	public void setUrlUnderTest(String u) {
-		urlUnderTest = u;
-	}
-
-	public TestSuite getSuite() {
-		return suite;
-	}
-
-	public void setSuite(TestSuite s) {
-		suite = s;
-	}
 
 }

@@ -1,32 +1,24 @@
 package ebay.qa.testautomation.test;
 
-import java.util.List;
+import org.junit.Assert;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
+import cucumber.api.java.en.And;
 import ebay.qa.testautomation.pages.WebAppHomePage;
 import ebay.qa.testautomation.pages.WebAppSearchResultsPage;
 import ebay.qa.testautomation.reps.TestSearchResultItemCard;
-import junit.framework.Assert;
 
-public class SearchTest extends SystemTest {
+public class SearchTest {
 
-	public SearchTest(String testName) {
-		super(testName);
-	}
+	private SystemTest t = new SystemTest();
 
-	public SearchTest(String testName, String url, String b) {
-		super(testName, url, b);
-	}
-
-	public void testSearchAllCategories() {
+	@And("^I navigate to '(.*)'")
+	public void testSearchAllCategories(String url) {
 
 		String searchText = "xbox";
 
-		getTestDriver().get(getUrlUnderTest());
+		t.getTestDriver().get(url);
 
-		WebAppHomePage wbp = new WebAppHomePage(getTestDriver());
+		WebAppHomePage wbp = new WebAppHomePage(t.getTestDriver());
 		WebAppSearchResultsPage searchrp = wbp.doSearch(searchText);
 
 		// Assert.assertTrue(searchrp.getNoOfResults() > 0);
@@ -55,9 +47,9 @@ public class SearchTest extends SystemTest {
 		String searchText = "xbox";
 		String category = "Books, Comics & Magazines";
 
-		getTestDriver().get(getUrlUnderTest());
+		t.getTestDriver().get("");
 
-		WebAppHomePage wbp = new WebAppHomePage(getTestDriver());
+		WebAppHomePage wbp = new WebAppHomePage(t.getTestDriver());
 		WebAppSearchResultsPage searchrp = wbp.doSearchPerCategory(searchText, category);
 
 		// Assert.assertTrue(searchrp.getNoOfResults() > 0);

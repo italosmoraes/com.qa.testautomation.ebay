@@ -120,6 +120,7 @@ public class WebAppSearchResultsPage extends WebAppPage {
 	public boolean verifyResultItemsMatchesSearch(String searchText){
 		
 		System.out.println("Verifying results matches the search text:" + searchText);
+		return false;
 		
 	}
 	
@@ -129,6 +130,7 @@ public class WebAppSearchResultsPage extends WebAppPage {
 		//need to know how the website handles variations like PS4 and playstation 4!
 		
 		System.out.println("Verifying results matches the search text or registered variations:" + searchText);
+		return false;
 	}
 
 }
