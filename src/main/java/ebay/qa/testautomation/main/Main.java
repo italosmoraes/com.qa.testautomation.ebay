@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 plugin = {"pretty", "html:target/cucumber"},
 features = {"classpath:features"},
 glue= {"ebay.qa.testautomation.test"},
-tags= {"@001"}
+tags= {"@003"}
 )
 
 public class Main {

@@ -21,22 +21,22 @@ public class SystemTest extends TestCase {
 
 	public static TestDriver testDriver;
 	public static String browser;
-	public static String urlUnderTest;
-	public static TestSuite suite;
-	
-	public SystemTest(){
-		
+
+	public SystemTest() {
+
 	}
 
 	// rump up
 	@Before
 	public void setUp() {
 
-		System.out.println("Initiating test" );
+		System.out.println("Initiating test");
 
-		//default browser
+		// default browser
 		browser = "chrome";
-		
+
+		System.out.println("Using default browser: " + browser);
+
 		// get parameters
 		setTestDriver(browser);
 
@@ -44,7 +44,6 @@ public class SystemTest extends TestCase {
 
 	@After
 	public void tearDown() {
-
 
 		System.out.println("Finalizing tests.");
 
@@ -57,6 +56,5 @@ public class SystemTest extends TestCase {
 	public void setTestDriver(String d) {
 		testDriver = new TestDriver(d);
 	}
-
 
 }

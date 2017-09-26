@@ -19,16 +19,23 @@ public class WebAppSearchResultsPage extends WebAppPage {
 		resultItemCards = new ArrayList<TestSearchResultItemCard>();
 	}
 
+	/**
+	 * gets the number of results found, as shown in the results page summary
+	 * 
+	 * @return
+	 */
 	public int getNoOfResults() {
 
 		String resultsNo = this.getWebDriver().findElement(By.className("rsHdr")).findElement(By.className("rcnt"))
 				.getText();
 
-		// TODO needs a number handler
-
 		return Integer.getInteger(resultsNo);
 	}
 
+	/**
+	 * Get the actual search results text, to verify the actual search term
+	 * @return
+	 */
 	public String getNoOfResultsText() {
 
 		return this.getWebDriver().findElement(By.className("rsHdr")).findElement(By.className("kwcat")).getText();
@@ -49,7 +56,7 @@ public class WebAppSearchResultsPage extends WebAppPage {
 	 */
 	public ArrayList<TestSearchResultItemCard> getAllResultItemCards() {
 
-		System.out.println("Getting all the search results Item Cards");
+		System.out.println("Getting all the search results Item Cards...");
 
 		List<WebElement> resultsList = getWebDriver().findElements(By.className("sresult"));
 		System.out.println("Found " + resultsList.size() + " results Items in the first page");
@@ -74,12 +81,12 @@ public class WebAppSearchResultsPage extends WebAppPage {
 			// buyitnoworbestoffer
 			// does not matter at this point, I only need to know if: lvformat
 			// has a title or a "bid" text
-			WebElement offerFormat = card.findElement(By.className("lvformat"));
 			String lvformat = card.findElement(By.className("lvformat")).getText();
-			if (lvformat == "") {
+			if (lvformat.equals("")) { //lvformat <span> is empty in this case
 				itemCard.setOfferType(card.findElement(By.className("lvformat")).getAttribute("title"));
 			} else {
-				itemCard.setOfferType(lvformat);
+				itemCard.setOfferType("auction");
+				itemCard.setNoOfBidsText(lvformat); //gets the No of bids from <span> text
 			}
 
 			this.resultItemCards.add(itemCard);
@@ -113,8 +120,12 @@ public class WebAppSearchResultsPage extends WebAppPage {
 		} else {
 			System.out.println("Error displaying content");
 		}
+		
+		System.out.println("DONE verifying item cards content.");
 
 		return contentDisplayed;
+		
+		
 	}
 	
 	public boolean verifyResultItemsMatchesSearch(String searchText){
