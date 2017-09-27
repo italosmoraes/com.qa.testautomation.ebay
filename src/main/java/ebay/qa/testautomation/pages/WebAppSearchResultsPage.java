@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import ebay.qa.testautomation.reps.TestSearchResultItemCard;
-import junit.framework.Assert;
 
 public class WebAppSearchResultsPage extends WebAppPage {
 
@@ -160,6 +159,21 @@ public class WebAppSearchResultsPage extends WebAppPage {
 		
 		System.out.println("Verifying results matches the search text or registered variations:" + searchText);
 		return false;
+	}
+	
+	/**
+	 * Goes through Result Items in the page and verifies if the current order matches the filter
+	 * 
+	 * @param criteria
+	 */
+	public void verifySortOrder(){
+		
+		//get current sort
+		
+		//go through all card items
+		
+		//verify order by criteria
+		
 	}
 
 }

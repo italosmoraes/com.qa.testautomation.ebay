@@ -6,7 +6,14 @@ Given I am a non-registered customer
 And I navigate to 'http://www.ebay.co.uk'
 When I search for an item: 'iphone'
 Then I get a list of matching results 
-And I can sort the item by Best Match, Lowest Price + P&P, Highest Price, Newly listed, etc
+And I can sort the results by 'Lowest price' 
+#And I can sort the item by Lowest Price + P&P
+#And I can sort the item by Lowest Price + P&P
+#And I can sort the item by Highest Price 
+#And I can sort the item by Lowest Price
+#And I can sort the item by Newly Listed
+#And I can sort the item by Ending Soonest
+#And I can sort the item by Nearest First
 
 @002
 Scenario: Search and Filter results
