@@ -98,28 +98,41 @@ public class WebAppSearchResultsPage extends WebAppPage {
 
 	public boolean verifyResultsItemCardsContentDisplayed() {
 
-		System.out.println("Verifying card items content");
+		System.out.println("Verifying card items content displayed...");
 
 		boolean contentDisplayed = false;
 
 		for (TestSearchResultItemCard card : this.resultItemCards) {
+			
+			System.out.println(card.getId() + " | " +  card.getTitleText() + ": ");
+			
 			WebElement item = this.getWebDriver().findElement(By.id(card.getId()));
 
 			contentDisplayed = item.findElement(By.className("lvtitle")).isDisplayed();
-
+			
 			contentDisplayed = item.findElement(By.className("lvprice")).isDisplayed();
 
 			contentDisplayed = item.findElement(By.className("lvshipping")).isDisplayed();
 
-			contentDisplayed = item.findElement(By.className("lvformat")).isDisplayed();
+			WebElement lvFormat = item.findElement(By.className("lvformat"));
+			
+			if(card.getOfferType().equals("Buy it now")){
+				contentDisplayed = lvFormat.findElement(By.className("logoBin")).isDisplayed();
+			}else if(card.getOfferType().equals("Buy it now or Best Offer")){
+				contentDisplayed = lvFormat.findElement(By.className("logoBinBo")).isDisplayed();
+			}else if(card.getOfferType().equals("auction")){
+				contentDisplayed = lvFormat.findElement(By.cssSelector("span")).isDisplayed();
+			}
+			
+			if (contentDisplayed) {
+				System.out.println("...content displayed correctly");
+			} else {
+				System.out.println("Error displaying content for: " + card.getTitleText() + ", " + card.getId());
+				return contentDisplayed;
+			}
 
 		}
 
-		if (contentDisplayed) {
-			System.out.println("All Result Items content displayed correctly");
-		} else {
-			System.out.println("Error displaying content");
-		}
 		
 		System.out.println("DONE verifying item cards content.");
 
@@ -135,7 +148,12 @@ public class WebAppSearchResultsPage extends WebAppPage {
 		
 	}
 	
-
+	/**
+	 * handling the testing of search variations like abreviations and half-words
+	 * 
+	 * @param searchText
+	 * @return
+	 */
 	public boolean verifyResultItemsMatchesSearchVariations(String searchText){
 		
 		//need to know how the website handles variations like PS4 and playstation 4!

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import ebay.qa.testautomation.pages.WebAppHomePage;
@@ -18,10 +19,15 @@ public class SearchTest {
 	WebAppHomePage wbp;
 
 	WebAppSearchResultsPage searchrp;
-	
+
 	String searchText;
-	
+
 	ArrayList<TestSearchResultItemCard> resultCards;
+
+	@Given("^I am a non-registered customer")
+	public void nonRegisteredCustomer() {
+		System.out.println("Navigating as a non registered customer...");
+	}
 
 	@And("^I navigate to '(.*)'")
 	public void testSearchAllCategories(String url) {
@@ -38,7 +44,7 @@ public class SearchTest {
 		wbp = new WebAppHomePage(t.getTestDriver());
 
 		searchText = item;
-		
+
 		searchrp = wbp.doSearch(item);
 
 		Assert.assertTrue(searchrp.getNoOfResultsText().contains(item));
@@ -46,12 +52,12 @@ public class SearchTest {
 		// get all the cards
 		resultCards = searchrp.getAllResultItemCards();
 
-		Assert.assertTrue(searchrp.verifyResultsItemCardsContentDisplayed());
-
 	}
-	
+
 	@Then("^I get a list of matching results")
-	public void verifySearchResults(){
+	public void verifySearchResults() {
+
+		System.out.println("Verifying the results list content titles...");
 		
 		// verify result matches search
 		for (TestSearchResultItemCard item : resultCards) {
@@ -59,6 +65,13 @@ public class SearchTest {
 			Assert.assertTrue(item.getTitleText().toLowerCase().contains(searchText.toLowerCase()));
 		}
 		
+		System.out.println("Results contain expected text.");
+
+	}
+
+	@And("^the resulting items cards have: postage price, No of bids, price or show BuyItNow tag")
+	public void verifyItemCardsDisplay() {
+		Assert.assertTrue(searchrp.verifyResultsItemCardsContentDisplayed());
 	}
 
 	/**
@@ -67,6 +80,7 @@ public class SearchTest {
 	 * @param searchTerm
 	 * @param category
 	 */
+	@And("^I select a specific category on which to search")
 	public void testSearchSpecificCategory() {
 		String searchText = "xbox";
 		String category = "Books, Comics & Magazines";
