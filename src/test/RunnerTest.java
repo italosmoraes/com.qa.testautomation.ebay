@@ -1,4 +1,4 @@
-package ebay.qa.testautomation.main;
+package test;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
@@ -13,6 +13,6 @@ glue= {"ebay.qa.testautomation.test"},
 tags = {"@001"}
 )
 
-public class TestRunner {
+public class RunnerTest {
 	
 }
