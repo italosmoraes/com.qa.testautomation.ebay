@@ -5,13 +5,14 @@ import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
+
 @CucumberOptions(
-plugin = {"pretty", "html:target/cucumber"},
+plugin = {"json:build/cucumber.json"},
 features = {"classpath:features"},
 glue= {"ebay.qa.testautomation.test"},
-tags= {"@001"}
+tags = {"@001"}
 )
 
-public class Main {
-
+public class TestRunner {
+	
 }
