@@ -80,20 +80,6 @@
 				<targetPath>features</targetPath>
 			</resource>
 			<resource>
-				<directory>ObjectMap</directory>
-				<includes>
-					<include>**/*.json</include>
-				</includes>
-				<targetPath>ObjectMap</targetPath>
-			</resource>
-			<resource>
-				<directory>data</directory>
-				<includes>
-					<include>**/*.csv</include>
-				</includes>
-				<targetPath>data</targetPath>
-			</resource>
-			<resource>
 				<directory>resources</directory>
 				<includes>
 					<include>**/*.*</include>
